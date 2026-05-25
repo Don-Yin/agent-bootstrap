@@ -20,6 +20,19 @@ install_gh() {
   esac
 }
 
+install_git() {
+  case "$(uname -s)" in
+    Darwin) brew install git ;;
+    Linux)
+      if   command -v apt-get >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y git
+      elif command -v dnf     >/dev/null 2>&1; then sudo dnf install -y git
+      elif command -v yum     >/dev/null 2>&1; then sudo yum install -y git
+      elif command -v pacman  >/dev/null 2>&1; then sudo pacman -S --needed --noconfirm git
+      else echo "install git manually" >&2; exit 1; fi ;;
+  esac
+}
+
+command -v git >/dev/null 2>&1 || { log "installing git"; install_git; }
 command -v gh >/dev/null 2>&1 || { log "installing GitHub CLI"; install_gh; }
 
 if ! gh auth status >/dev/null 2>&1; then
