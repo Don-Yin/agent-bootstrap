@@ -3,7 +3,7 @@ set -euo pipefail
 
 AGENT_SETUP_REPO="${AGENT_SETUP_REPO:-Don-Yin/agent-setup}"
 AGENT_SETUP_BRANCH="${AGENT_SETUP_BRANCH:-main}"
-AGENT_SETUP_PROFILE="${AGENT_SETUP_PROFILE:-remote-minimal}"
+AGENT_SETUP_PROFILE="${AGENT_SETUP_PROFILE:-remote}"
 WORKDIR="$(mktemp -d "${TMPDIR:-/tmp}/agent-setup.XXXXXX")"
 
 cleanup() {
