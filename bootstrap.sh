@@ -11,7 +11,7 @@ install_gh() {
       command -v brew >/dev/null 2>&1 || { echo "need Homebrew: https://brew.sh" >&2; exit 1; }
       brew install gh ;;
     Linux)
-      if   command -v nix-env >/dev/null 2>&1; then nix-env -iA nixpkgs.gh
+      if   command -v nix >/dev/null 2>&1; then nix profile install nixpkgs#gh
       elif command -v apt-get >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y gh
       elif command -v dnf     >/dev/null 2>&1; then sudo dnf install -y gh
       elif command -v yum     >/dev/null 2>&1; then sudo yum install -y gh
@@ -25,7 +25,7 @@ install_git() {
   case "$(uname -s)" in
     Darwin) brew install git ;;
     Linux)
-      if   command -v nix-env >/dev/null 2>&1; then nix-env -iA nixpkgs.git
+      if   command -v nix >/dev/null 2>&1; then nix profile install nixpkgs#git
       elif command -v apt-get >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y git
       elif command -v dnf     >/dev/null 2>&1; then sudo dnf install -y git
       elif command -v yum     >/dev/null 2>&1; then sudo yum install -y git
