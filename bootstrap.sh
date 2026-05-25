@@ -3,7 +3,6 @@ set -euo pipefail
 
 AGENT_SETUP_REPO="${AGENT_SETUP_REPO:-Don-Yin/agent-setup}"
 AGENT_SETUP_BRANCH="${AGENT_SETUP_BRANCH:-main}"
-AGENT_SETUP_PROFILE="${AGENT_SETUP_PROFILE:-remote}"
 WORKDIR="$(mktemp -d "${TMPDIR:-/tmp}/agent-setup.XXXXXX")"
 
 cleanup() {
@@ -89,7 +88,7 @@ main() {
   ensure_gh
   ensure_auth
   fetch_private_payload
-  AGENT_SETUP_MODE=copy AGENT_SETUP_PROFILE="$AGENT_SETUP_PROFILE" "$WORKDIR/src/pull-agents.sh" "$@"
+  "$WORKDIR/src/pull-agents.sh" --copy "$@"
 }
 
 main "$@"
