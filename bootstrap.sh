@@ -52,6 +52,7 @@ if [[ -d "$MS/agents-configurations" ]]; then
 else
   log "cloning machine-setup to $MS (tmpfs)"
   gh repo clone Don-Yin/machine-setup "$MS" -- --depth 1
+  chmod 700 "$MS"
   cd "$MS" && git sparse-checkout init --cone && git sparse-checkout set agents-configurations rules-compiled utils && cd -
 fi
 
