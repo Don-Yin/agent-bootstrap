@@ -18,21 +18,14 @@ AGENT_PATHS=(
   "CLAUDE.md"
 )
 
-log "cleaning agent symlinks in $TARGET_ROOT"
+log "cleaning agent files in $TARGET_ROOT"
 for p in "${AGENT_PATHS[@]}"; do
   target="$TARGET_ROOT/$p"
-  if [[ -L "$target" ]]; then
-    rm -f "$target"
-    log "removed symlink $p"
-  elif [[ -e "$target" ]]; then
-    log "skipping $p (not a symlink, left untouched)"
+  if [[ -L "$target" || -e "$target" ]]; then
+    rm -rf "$target"
+    log "removed $p"
   fi
 done
-
-if [[ -d "$TARGET_ROOT/.agents" ]] && [[ -z "$(ls -A "$TARGET_ROOT/.agents" 2>/dev/null)" ]]; then
-  rmdir "$TARGET_ROOT/.agents"
-  log "removed empty .agents/"
-fi
 
 if [[ -d "$MS" ]]; then
   rm -rf "$MS"
